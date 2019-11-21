@@ -1,0 +1,71 @@
+//This code was created on 11/19/19 in Dr.T's Programming Fundamentals II class at the Tarrant County College at Trinity River.
+
+//Rabia_Ahmad
+//Dr_T
+//11-19-19
+//An array of class objects
+#include <iostream>
+#include <iomanip>
+#include "Inventoryitem.h"
+#include <vector>
+using namespace std;
+
+int main() 
+{
+  //instantiate an inventory item, called item1 using the default constructor
+  InventoryItem item1; //default constructor is called and no arguments are passed
+  //instantiate an inventory item description Hammer with one parameter
+  InventoryItem item2("Hammer");
+
+  item1.setDescription("Saw");
+  item1.setCost(25.99);
+  item1.setUnits(8);
+
+  InventoryItem item3("Flathead Screwdriver", 5.33, 63);
+
+  //*****************An Array of Objects********************
+  //The goal is to store and efficiently display the items in the list/array
+  const int NUM_ITEMS = 3;
+  InventoryItem inventoryArray[NUM_ITEMS]; //Given the array named inventoryArray the capacity to hold 3 items
+  inventoryArray[0] = item1; //item1 is stored as the first element in the array
+  inventoryArray[1] = item2; //item2 is stored as the 2nd element in the array
+  inventoryArray[2] = item3;
+  //lets print it!
+  cout << "\nItems in the inventory list: " << endl;
+  cout << setw(20) << "Inventory Item"
+       << setw(8) << "Cost" << setw(8)
+       << setw(18) << "Units in stock\n"; 
+  cout << "****************************************************\n";
+  //need a for loop to print each item of the array
+  for(int i = 0; i < NUM_ITEMS; i++)
+  {
+    cout << setw(20) << inventoryArray[i].getDescription();
+    cout << setw(8) << inventoryArray[i].getCost();
+    cout << setw(7) << inventoryArray[i].getUnits();
+    cout << endl;
+  }
+  //output the data using a vector
+  vector<InventoryItem> inventoryVector; //same thing as line 26,27
+  inventoryVector.push_back(item1); //same as 28
+  inventoryVector.push_back(item2); //same as 29
+  inventoryVector.push_back(item3); //same as 30
+
+  cout << "\nItems in the inventory list: " << endl;
+  cout << setw(20) << "Inventory Item"
+       << setw(8) << "Cost" << setw(8)
+       << setw(18) << "Units in stock\n"; 
+  cout << "****************************************************\n";
+  //lets print in vector style
+  for(InventoryItem x : inventoryVector) //let x equal every item in the inventory vector, x is holding item 
+  {
+    cout << setw(20) << x.getDescription();
+    cout << setw(8) << x.getCost();
+    cout << setw(7) << x.getUnits();
+    cout << endl;
+  }
+
+
+
+
+  return 0;
+}
