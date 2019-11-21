@@ -1,0 +1,140 @@
+//This is a program made in Dr.McMillan's Programming Fundamentals II course on 10/31/19. 
+//Rabia Ahmad
+
+
+//RabiaAhmad
+//Dr_T
+//
+//10-31-19
+#include <iostream>
+#include <string>
+#include <vector>
+using namespace std;
+
+class Pet
+{
+  private:
+    string name;
+    string type;
+    int age;
+  public:
+    Pet(){ name = "";type = "";age = 0; } //default constructor 
+    Pet (string n, string t, int a){ name = n;type = t;age = a; } //parameterized constructor 
+    void setName(string n) { name = n; }
+    void setType(string t) { type = t; }
+    void setAge (int a) { age = a; }
+    string getName() const { return name; }
+    string getType() const { return type; }
+    int getAge() const { return age; }
+    void printPet()
+    {
+      cout << "\nPET INFORMATION" ;
+      cout << "\n\tName: " << getName();
+      cout << "\n\tType: " << getType();
+      cout << "\n\tAge: " << getAge() << endl;
+    }
+    void updatePet() // when this is called you can change the pet (which is an object) information 
+    {
+      string newName = "", newType = "";
+      int newAge = 0; 
+      cout << "Please type the new name [space] the new type [space] and new age [enter]. " << endl;
+      cin >> newName >> newType >> newAge;
+      cout << "\n**********Updated Pet Information**********";
+      //reuse your setters!
+      setName(newName);
+      setType(newType);
+      setAge(newAge);
+
+      //print your pet object 
+      printPet();
+    }
+};
+
+class petParent
+{
+  private:
+    string name;
+    string location;
+    vector<Pet> petsParented;
+  public:
+    petParent() { name = ""; location = ""; }
+    void setName(string n) { name = n; }
+    void setLocation(string l) { location =l; }
+    void setPetsParented(Pet p)
+    {
+      petsParented.push_back(p); //add this Pet,p, to this PetParent vector 
+    }
+    string getName() const { return name; }
+    string getLocation() const { return location; }
+    void getPetsParented()
+      {
+        //use a for loop to print each pet object to the screen
+        for(Pet x : petsParented) //data type - variable to hold object - data structure
+        {
+          x.printPet(); // print the individual objects data 
+        }
+      }
+    void printParent()
+    {
+      cout << "\nPET PARENT INFORMATION " << endl;
+      cout << "Name: " << getName() << endl;
+      cout << "Location: " << getLocation() << endl;
+      cout << "Pets Parents: " << endl;
+      getPetsParented(); //print the pets associated with the PetParent       
+    }
+    void updateParent()
+    {
+      string newName = "", newLocation = "";
+      cout << " New name [space] new location [enter] " << endl;
+      cin >> newName >> newLocation;
+      cout << "**********UPDATED PARENT INFORMATION**********" << endl;
+      setName(newName);
+      setLocation(newLocation);
+      printParent(); // print the updated parent info
+    }
+
+};
+
+
+int main() 
+{
+  //instantiate 2 pet Objects (p1 and p2)
+  Pet p1; // this calls the default constructor Pet()
+  p1.printPet();
+  p1.updatePet(); //this populates information in p1 and prints it!
+
+  cout << "\nPET 2 INFORMATION " << endl;
+  //instantiate your pet as p2 and print your pet to the screen
+  Pet p2("Indie" , "Kitty", 2);
+  p2.printPet(); //print the pet 
+  Pet p3("Iago", "Birdie", 2);
+
+
+  //instantiate a PetParent pp1; (parent pets)
+  petParent pp1;
+  petParent pp2;
+
+  //set p1 and p2 as pets of pp1
+  pp1.setPetsParented(p1);
+  pp1.setPetsParented(p2);
+  pp2.setPetsParented(p3);
+
+  //print pp1 to the screen with their pets
+  //pp1.printParent();
+   pp2.printParent();
+
+//Dr_T Challenge: Add pp2 to PetParent (Give parent a name/location)
+//Use setters to set pp2 location and name
+//Add a pet bird to the PetParent with a name p3
+//Upload image of plan to this repl
+//Share
+
+  //petParent pp1;
+  pp1.updateParent();
+  pp1.setPetsParented(p1);
+  pp1.setPetsParented(p2);
+  //pp1.printParent();
+
+
+  return 0;
+}
