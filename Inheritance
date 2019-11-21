@@ -1,0 +1,73 @@
+//This code was made on 11/12/19
+//With Dr.T at Tarrant County College-Trinity River
+//In this assignment we learned how parent and child class interacts. 
+
+
+//Rabia_Ahmad
+//11-12-19
+//A PROGRAM OF HOW TO INSTANTIATE A PARENT AND CHILD CLASS IN C++11
+
+#include <iostream>
+#include <string>
+using namespace std;
+
+class CollegeCourse //parent class 
+{
+  protected:
+    string department;
+    int courseNum;
+    int creditHours;
+    double tuition;
+  public:      //initializer list method- d/cN/cH/t are used for when we instantiate in int main 
+    CollegeCourse(string d, int cN, int cH, double t): department(d), courseNum (cN), creditHours (cH), tuition (t) {   }
+    void showCollegeCourse() 
+    {
+      cout << department << courseNum << " " << creditHours << " credits." << " Tuition $" << tuition << endl; 
+      //this will output all of the information needed like this : CIS250 4 credits. Tuition $444.44
+    }
+
+
+};
+
+
+class LabCourse : public CollegeCourse //the child class (LabCourse) is changing the protected data into public so that it can be accessed
+{
+  private:
+    double labFee = 30.25;
+  public:    //instantiating the child's data   :  then setting the parent's data (INITIALIZER LIST METHOD SYNTAX)
+    LabCourse(string d, int cN, int cH, double t): CollegeCourse(d, cN, cH, t) { }
+    void showLabCourse()
+    {
+      cout << department << courseNum << " " << creditHours << " credits." << " Tuition $" << tuition << endl;
+      cout << "\nplus lab fee of $" << labFee << " for a total of $" << (tuition + labFee) << endl; 
+    }
+
+};
+
+
+
+int main() 
+{
+  CollegeCourse cc("ENG", 121, 3, 333.33); //instantiate the parent constructor aka CollegeCourse
+  LabCourse lc("CIS", 250, 4, 444.44); //instantiate the child constructor aka LabCourse which also sets Parents values 
+  //print to the screen
+  cc.showCollegeCourse(); //now print to the screen!
+  lc.showLabCourse(); //print to the screen!
+
+
+
+//EXPAND THIS PROGRAM 
+/*
+  1.write a setLabFee and a getLabFee method
+  2. in int main() prompt the user for a labFee
+  3. set the new lab fee
+  4. print the new lab fee to the screen
+  5. reprint lc to the screen "what does the tuition value look like now?"
+  6. Share the URL and downloaded .zip to EC item 15
+  7. Break until 1:40 pm 
+  8. Then unit 5 assignment 
+
+
+*/
+  return 0;
+}
